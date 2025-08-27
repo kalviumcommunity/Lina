@@ -527,3 +527,76 @@ This gives both transparency and higher quality, which is essential for professi
 That’s why Chain-of-Thought is a perfect fit for my project."
 
 ---
+
+
+# 🎥 Video Script: Function Calling in LinkedIn Assistant
+
+---
+
+### **Introduction**
+
+👋 *"Hello everyone, welcome back! In this video, I’m going to explain how I’ve implemented **Function Calling** in my LinkedIn Assistant project. We’ll go step by step, starting with what function calling means, why it is important, and finally, how I applied it in my own use case."*
+
+---
+
+### **What is Function Calling?**
+
+🗣️ *"So first, what exactly is function calling in AI prompting? Function calling is a feature where instead of just returning plain text, the AI can **decide when to call a function in our backend code**, pass the correct structured arguments, and then use the function’s response to give a more useful answer."*
+
+💡 *"Think of it like this: normally, an AI assistant just ‘talks’ back. But with function calling, the assistant can ‘take action’. It’s like asking the assistant to not just tell you the weather, but to actually call a weather API, fetch live data, and then explain it to you. This turns the AI from just a chatbot into a **smart agent**."*
+
+---
+
+### **Why Function Calling is Relevant to LinkedIn Assistant**
+
+🖋️ *"In my project, the LinkedIn Assistant, the AI helps automate LinkedIn posts, reminders, and engagement. Now here’s where function calling comes in: instead of the assistant just suggesting something like ‘You should post at 9 AM’, it can actually **call a scheduling function** in my backend to create that reminder."*
+
+📌 *"So function calling allows my assistant to:*
+
+1. *Set a LinkedIn post reminder*
+2. *Fetch my upcoming LinkedIn activity schedule*
+3. *Format structured post ideas, like carousels or hooks, automatically"*
+
+---
+
+### **How I Implemented It (Code Explanation)**
+
+🖥️ *"Let me walk you through the code. I’ve created a Python file inside my project structure called `function_calling.py` under the `prompts/` folder. In this file, I define two things:*
+
+1. *The **function schema** – basically telling the AI what kind of function it can call, what parameters it takes, and their data types.*
+2. *The **actual Python function** – for example, `schedule_post` which takes the post content and time, and saves it in the system."*
+
+📑 *"Here’s a simple breakdown of the flow:*
+
+* The AI receives a user request like: *‘Remind me to post about AI at 6 PM’*
+* Instead of replying with plain text, the AI **calls my `schedule_post` function**, passing arguments: `{"content": "Post about AI", "time": "6 PM"}`
+* My backend executes it, confirms scheduling, and then the AI responds: *‘Great! I’ve scheduled your LinkedIn post for 6 PM.’*"\*
+
+---
+
+### **Why This is Powerful**
+
+⚡ *"This makes my LinkedIn Assistant way more powerful. It’s not just suggesting actions — it’s actually **doing them**. This bridges the gap between AI text generation and real-world actions."*
+
+🔗 *"So instead of me manually setting reminders or writing drafts, the AI can automatically handle these actions. That’s the power of function calling."*
+
+---
+
+### **RTFC Framework Usage**
+
+📝 *"I also applied the RTFC framework when designing my prompts here:*
+
+* **R (Role):** I told the assistant its role is to act as a LinkedIn productivity manager.
+* **T (Task):** I asked it to schedule, create, or fetch LinkedIn posts via functions.
+* **F (Format):** I defined the function schema so the assistant always outputs structured arguments like JSON.
+* **C (Constraints):** I restricted it to only call defined functions, not generate random code or API calls."\*
+
+---
+
+### **Closing**
+
+🎯 *"To summarize, function calling lets my LinkedIn Assistant move from just text responses to **real actionable workflows**. It’s like giving the assistant hands to actually perform tasks instead of just suggesting them. In my project, this is extremely useful for automating LinkedIn posts, scheduling, and reminders."*
+
+🙌 *"That’s it for this video. In the next one, I’ll dive deeper into how we connect function calling with real APIs. Thanks for watching!"*
+
+---
