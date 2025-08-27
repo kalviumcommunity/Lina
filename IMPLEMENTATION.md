@@ -302,3 +302,151 @@ So One-Shot Prompting combines RTFC with an illustrative example — making resp
 
 ✅ End of Script
 
+
+# 🎙️ Video Script: Multi-Shot Prompting
+
+---
+
+## **Introduction**
+
+"Hi everyone, in this video, I’m going to explain **Multi-Shot Prompting**, how it works, and how I’ve implemented it in my project.
+
+We’ve already seen **Zero-Shot Prompting**, where we provide the model with only a task description and no examples.
+
+Then we looked at **One-Shot Prompting**, where we added a single example to guide the model.
+
+Now, we move to the next step, which is **Multi-Shot Prompting**, where we provide multiple examples to the model so it can learn the expected pattern more clearly and generate consistent outputs."
+
+---
+
+## **What is Multi-Shot Prompting?**
+
+"Multi-Shot Prompting means that instead of giving the model just one example, we provide several examples of inputs and outputs.
+
+This way, the model doesn’t just rely on instructions—it has multiple reference points for how to respond.
+
+Think of it as training by demonstration. The more examples we provide, the more consistent and accurate the output becomes."
+
+---
+
+## **Why Use Multi-Shot Prompting?**
+
+"There are a few reasons why Multi-Shot Prompting is useful:
+
+1. It **reduces ambiguity**. With multiple examples, the model clearly understands the pattern.
+2. It **increases reliability**, especially for structured outputs like JSON.
+3. It is very effective for **domain-specific tasks** where consistency is critical.
+
+For example, in my project where the AI assistant extracts and explains content from PDFs, using multiple examples ensures that the output always follows the strict JSON format I’ve defined."
+
+---
+
+## **Code Implementation**
+
+"Now let’s look at the code I used for Multi-Shot Prompting.
+
+In my backend, I created a Python file for handling prompts. Inside it, I defined a function for **multi-shot prompting**.
+
+Here’s the structure of the code:"
+
+```python
+from openai import OpenAI
+
+client = OpenAI()
+
+# Multi-Shot Prompt with multiple examples
+multi_shot_prompt = """
+Role: You are an AI PDF Expert Assistant.
+Task: Help users understand and interact with their uploaded PDFs by answering questions strictly based on PDF content.
+Format: Always respond in strict JSON format:
+{
+  "answer": "",
+  "summary": "",
+  "key_points": []
+}
+
+Here are some examples:
+
+Example 1:
+User Question: What is the title of the PDF?
+Response:
+{
+  "answer": "The title of the PDF is 'Climate Change Report 2025'.",
+  "summary": "The PDF discusses the impacts of climate change.",
+  "key_points": ["Climate change", "Environmental impacts", "2025 report"]
+}
+
+Example 2:
+User Question: Summarize the second chapter.
+Response:
+{
+  "answer": "Chapter 2 provides an overview of renewable energy adoption.",
+  "summary": "It explains solar, wind, and hydro energy trends.",
+  "key_points": ["Renewable energy", "Solar", "Wind", "Hydro"]
+}
+
+Now here is the real user query:
+User Question: {question}
+"""
+
+def multi_shot_prompting(question):
+    prompt = multi_shot_prompt.format(question=question)
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": prompt}
+        ]
+    )
+
+    return response.choices[0].message["content"]
+
+
+# Example usage
+user_question = "What does Chapter 3 explain?"
+print(multi_shot_prompting(user_question))
+```
+
+---
+
+## **Explanation of the Code**
+
+"Let me break this down step by step:
+
+1. First, I defined the **role** of the assistant as a PDF Expert that answers questions based only on PDF content.
+2. Then, I specified the **output format** in strict JSON, so the model always follows the same structure.
+3. After that, I added **multiple examples**—one about the title of the PDF and another about summarizing a chapter.
+4. Finally, I left space for the **real user query**, which gets inserted dynamically at runtime.
+
+When the function runs, the AI model looks at both examples, identifies the pattern, and produces a consistent JSON response for the new question."
+
+---
+
+## **Why Multi-Shot Works Well in My Project**
+
+"In my project, users might ask very different kinds of questions about their PDFs—like the title, summaries, key points, or explanations.
+
+If I only used zero-shot or one-shot prompting, the responses might be inconsistent.
+
+But with **multi-shot prompting**, the model sees multiple structured examples and learns that it must always:
+
+* Provide a direct answer,
+* Include a summary, and
+* List key points.
+
+This ensures **accuracy and uniformity** across all responses, which is critical for building a reliable assistant."
+
+---
+
+## **Conclusion**
+
+"So to summarize:
+
+* **Zero-Shot Prompting** → No examples, just instructions.
+* **One-Shot Prompting** → One example, plus instructions.
+* **Multi-Shot Prompting** → Multiple examples, plus instructions, which ensures consistency and better performance.
+
+In my project, Multi-Shot Prompting helps the assistant always respond in the strict JSON format and stay reliable when handling different types of PDF-related queries.
+
+That’s how I’ve used Multi-Shot Prompting in my backend implementation."
+
