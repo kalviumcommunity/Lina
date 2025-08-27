@@ -450,3 +450,80 @@ In my project, Multi-Shot Prompting helps the assistant always respond in the st
 
 That’s how I’ve used Multi-Shot Prompting in my backend implementation."
 
+
+# 🎬 Video Script: Chain-of-Thought Prompting for LinkedIn Assistant
+
+---
+
+### **Introduction (Hook)**
+
+"Hello everyone! In this video, I’ll explain how I use **Chain-of-Thought prompting** in my LinkedIn Assistant project. Chain-of-Thought, or CoT prompting, is a technique where we explicitly encourage the AI to **think step by step** before producing the final answer. This is especially useful when the task requires reasoning, analysis, or generating structured responses. Let’s break it down with respect to my project."
+
+---
+
+### **Part 1: What is Chain-of-Thought Prompting?**
+
+"Normally, when we ask an AI model a question, it directly tries to give us the final output. But with **Chain-of-Thought prompting**, we ask the AI to **first reason through the problem step by step**, and then provide the final result.
+
+This helps the AI avoid mistakes, ensures more accurate responses, and makes it easier to handle **complex LinkedIn tasks** like generating personalized posts, analyzing engagement, or summarizing profiles."
+
+---
+
+### **Part 2: Why Chain-of-Thought is Useful in LinkedIn Assistant**
+
+"In my LinkedIn Assistant project, Chain-of-Thought prompting becomes very relevant in the following use cases:
+
+1. **Post Generation** – When a user asks the assistant to draft a professional post, CoT makes the AI first **analyze the user’s intent, audience, and tone**, and only then generate the polished LinkedIn post.
+
+2. **Engagement Strategy** – If the assistant is asked, *'How can I increase engagement on my LinkedIn posts?'*, CoT prompting helps the AI break it into steps: analyze current content style, identify gaps, and then suggest actionable improvements.
+
+3. **Profile Insights** – For summarizing a user’s LinkedIn profile or recommending optimizations, the AI can think step by step: first extract key achievements, then align them with professional goals, and finally present a clear summary."
+
+---
+
+### **Part 3: The Code Implementation**
+
+"In my backend, the CoT prompting is implemented by explicitly telling the AI to reason before answering. For example, here’s a snippet of Python code I use:
+
+```python
+chain_of_thought_prompt = """
+You are a LinkedIn Assistant.
+Task: Help users generate and refine LinkedIn posts.
+
+Follow this process:
+1. First, think through the problem step by step.
+2. Reason about the audience, tone, and goal of the post.
+3. Then, provide the final LinkedIn post as the output.
+
+User Request: {user_request}
+
+Answer in JSON format:
+{
+  "thought_process": "",
+  "final_post": ""
+}
+"""
+```
+
+With this setup, the AI doesn’t just jump to an answer. Instead, it fills the `thought_process` field with its reasoning, and then gives a clean `final_post` field with the polished LinkedIn content."
+
+---
+
+### **Part 4: How This Improves My Project**
+
+"This makes my LinkedIn Assistant more **trustworthy and professional**. For example:
+
+* Without CoT, the AI might just generate a generic post.
+* With CoT, it explains *why* it chose a certain style, then gives the final draft.
+
+This gives both transparency and higher quality, which is essential for professional networking platforms like LinkedIn."
+
+---
+
+### **Conclusion**
+
+"So to sum up: **Chain-of-Thought prompting** makes my LinkedIn Assistant smarter by encouraging step-by-step reasoning. This allows it to generate professional, personalized, and high-quality LinkedIn posts, engagement strategies, and profile summaries.
+
+That’s why Chain-of-Thought is a perfect fit for my project."
+
+---
