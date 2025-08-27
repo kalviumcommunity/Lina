@@ -196,3 +196,109 @@ So, to summarize:
 That’s how I’ve implemented **Zero-Shot Prompting** in my project.
 
 Thank you for watching!
+
+
+
+# 🎥 Video Script: One-Shot Prompting
+
+---
+
+### **Intro (Hook + Context)**
+
+“Hey everyone! In this video, I’ll be walking you through **One-Shot Prompting** — an important prompting technique we use in our AI-powered PDF Assistant project.
+
+You’ve already seen **Zero-Shot Prompting**, where we give the model just the instructions and expect it to perform the task without any prior examples.
+
+But sometimes, that’s not enough. The model might misunderstand what we want.
+
+That’s where **One-Shot Prompting** comes in. We provide the model with **one clear example** of the input and the output we expect, so it learns the format and context before answering the actual user query.”
+
+---
+
+### **Explanation of One-Shot Prompting**
+
+“Let’s break it down:
+
+* In **Zero-Shot Prompting**, we said:
+  ‘Here’s the role, here’s the task, now answer this question.’
+
+* In **One-Shot Prompting**, we add an **example interaction** — something like:
+  ‘Here’s a sample question a user might ask, and here’s the type of answer you should return.’
+
+This example acts as a **guide** for the model. It’s like showing it a solved problem before asking it to solve a new one.”
+
+---
+
+### **Code Walkthrough**
+
+“Now let me show you the code for One-Shot Prompting inside our backend.”
+
+```python
+# backend/prompts/one_shot_prompt.py
+
+system_prompt = """
+Role: You are an AI PDF Expert Assistant.
+Task: Help users understand and interact with their uploaded PDFs by answering questions strictly based on PDF content.
+Format: Always respond in strict JSON format:
+{
+  "answer": "",
+  "summary": "",
+  "key_points": []
+}
+Context: The user uploads a PDF document. Your job is to extract meaning, summarize sections, and answer questions without using external knowledge.
+Example:
+User Question: What is the abstract about?
+Response:
+{
+  "answer": "The abstract discusses the impact of climate change on polar bear habitats.",
+  "summary": "The abstract explains how rising temperatures reduce sea ice, making it harder for polar bears to hunt.",
+  "key_points": [
+    "Focus on polar bear survival",
+    "Rising temperatures",
+    "Loss of sea ice"
+  ]
+}
+"""
+
+def create_user_prompt(question: str) -> str:
+    return f"User Question: {question}"
+```
+
+---
+
+### **Narration while showing code**
+
+“In this code, we do three things:
+
+1. **System Prompt**: Defines the AI’s role, task, and response format — exactly like we did in zero-shot.
+
+2. **Example**: But this time, we added a worked-out example of a user question and the correct JSON response. This is the ‘one-shot’ part — one demonstration for the AI to follow.
+
+3. **User Prompt Function**: Finally, when the user asks their real question, the function appends it to the system prompt, and the AI already knows what kind of response to generate.”
+
+---
+
+### **Why This Works (RTFC Framework)**
+
+“Now let’s connect this to the **RTFC framework**:
+
+* **R – Role**: We clearly set the role as an ‘AI PDF Expert Assistant.’
+* **T – Task**: The AI’s task is to summarize and answer strictly from the PDF.
+* **F – Format**: We enforce JSON format for structured, consistent output.
+* **C – Context**: We provide not only the PDF but also **one example**, which acts as extra context to guide the model.
+
+So One-Shot Prompting combines RTFC with an illustrative example — making responses more reliable and closer to what we want.”
+
+---
+
+### **Wrap-Up**
+
+“To summarize:
+
+* **Zero-Shot** = Instructions only.
+* **One-Shot** = Instructions + one example.
+* This helps the AI understand both **what** to do and **how** to do it.
+
+
+✅ End of Script
+
