@@ -91,3 +91,108 @@ This way, my backend can reliably use the AI’s responses for summaries, answer
 "So that’s how I designed my **System Prompt** and **User Prompt**, and how the **RTFC framework** guided me.
 
 Thanks for watching – and if you’re building an AI project, try structuring your prompts with RTFC for more control and consistency."
+
+
+
+
+## 🎤 **Video Script: Zero-Shot Prompting**
+
+Hello everyone,
+
+In this video, I’m going to explain what **Zero-Shot Prompting** is, how it works, and how I’ve implemented it in my backend project.
+
+---
+
+### **Introduction to Zero-Shot Prompting**
+
+Let’s begin with the basics.
+
+Zero-shot prompting is a technique in AI prompting where you give an instruction or a query to the AI **without providing any prior examples or demonstrations**.
+
+Think of it like this: you are giving the AI only the task description, and the model has to figure out the answer on its own, based on its training knowledge.
+
+For example, if I say:
+*"Translate this English sentence into French: I love programming."*
+
+The AI immediately gives me the correct French translation: *"J’aime programmer."*
+
+Notice here, I didn’t give the AI any examples of English-to-French translations. That’s why it’s called **Zero-Shot**.
+
+---
+
+### **Why Zero-Shot is Useful in My Project**
+
+Now, let’s connect this to my backend project.
+
+In my project, the backend uses **system prompts and user prompts** to guide the AI when interacting with uploaded PDFs.
+
+The system prompt defines the **role of the AI**, the **task it has to perform**, and the **format in which it should respond**.
+
+The user prompt, on the other hand, contains the **actual question or query** that the user asks about their PDF.
+
+Here’s where **zero-shot prompting** comes into play.
+
+Since I want the AI to **answer questions about the PDF content** without showing it any training examples each time, I rely on zero-shot prompting.
+
+So, if the user uploads a PDF and asks:
+*"What is the summary of page 5?"*
+
+The AI uses the instructions from the system prompt and the user’s question to generate the answer—without me giving it sample questions or answers beforehand.
+
+---
+
+### **How I Implemented Zero-Shot Prompting in Code**
+
+Let me walk you through the code part.
+
+Inside my backend project, I created a file called **`zero_shot_prompt.py`**.
+
+Here’s the code:
+
+```python
+system_prompt = """
+Role: You are an AI PDF Expert Assistant.
+Task: Help users understand and interact with their uploaded PDFs by answering questions strictly based on PDF content.
+Format: Always respond in strict JSON format:
+{
+  "answer": "",
+  "summary": "",
+  "key_points": []
+}
+Context: The user uploads a PDF document. Your job is to extract meaning, summarize sections, and answer questions without using external knowledge.
+"""
+
+def create_user_prompt(question: str) -> str:
+    return f"User Question: {question}"
+```
+
+Now, when a user asks a question, for example:
+*"What is the conclusion of this research paper?"*
+
+The backend combines the **system prompt** and the **user’s question**, and then sends it directly to the AI model.
+
+Since I don’t provide any training examples or few-shot examples here, this is a **pure zero-shot prompt**.
+
+---
+
+### **Benefits of Zero-Shot Prompting in This Case**
+
+There are a few clear benefits of using zero-shot prompting here:
+
+1. **Simplicity** – I don’t need to prepare or hard-code training examples.
+2. **Flexibility** – The user can ask any type of question about the PDF, and the AI can handle it.
+3. **Lightweight** – It reduces overhead because I’m not constantly passing examples with every query.
+
+---
+
+### **Conclusion**
+
+So, to summarize:
+
+* **Zero-shot prompting** means giving the AI only instructions, without examples.
+* In my backend project, I’ve used it by combining a **system prompt** and a **user prompt** to guide the AI in answering PDF-related queries.
+* This makes my system flexible, simple, and efficient.
+
+That’s how I’ve implemented **Zero-Shot Prompting** in my project.
+
+Thank you for watching!
